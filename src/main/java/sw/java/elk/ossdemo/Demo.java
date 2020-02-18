@@ -1,4 +1,4 @@
-package sw.java.elk.demo;
+package sw.java.elk.ossdemo;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
@@ -13,7 +13,7 @@ public class Demo {
     // Endpoint以杭州为例，其它Region请按实际情况填写。
     static String endpoint = "oss-cn-shenzhen.aliyuncs.com";
     // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
-    static String accessKeyId = "LTAI4FsjUYeCudKXpRyc7oZu";
+    static String accessKeyId = "LTAI4FsjUYeCudKXpR yc7oZu";
     static String accessKeySecret = "rGpD9DEuK2m27jFGRnGCcXLq852w8l";
     static String bucketName = "shaun-oss";
 
