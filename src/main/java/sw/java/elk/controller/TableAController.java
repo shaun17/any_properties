@@ -6,6 +6,7 @@ import org.springframework.boot.jackson.JsonObjectSerializer;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -85,5 +86,15 @@ public class TableAController {
         iMessageService.send(MQConstant.ORDER_QUEUE_NAME, JSONObject.toJSONString(map), 10000);
 
         return "success";
+    }
+
+    @PostMapping(value = "/posttest")
+    public Object posttest() {
+        Map map = new HashMap();
+        map.put("orderId", "123456678");
+        map.put("orderDetile", "abcdefg");
+        map.put("orderTime", LocalDateTime.now());
+
+        return map;
     }
 }
