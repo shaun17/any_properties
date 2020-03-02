@@ -25,14 +25,9 @@ import java.time.Duration;
 @ConditionalOnClass(RedisOperations.class)
 @EnableConfigurationProperties(RedisProperties.class)
 public class RedisConfig {
+
 //    @Bean
 //    @ConditionalOnMissingBean(name = "redisTemplate")
-//    public RedisTemplate<Object, ObjectObject> redisTemplate() {
-//        return redisTemplate();
-//    }
-
-    @Bean
-    @ConditionalOnMissingBean(name = "redisTemplate")
     public RedisTemplate<Object, Object> redisTemplate(
             RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
