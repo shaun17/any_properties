@@ -1,4 +1,4 @@
-package sw.java.elk;
+package sw.java.elk.demo;
 
 import java.util.Arrays;
 
