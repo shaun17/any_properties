@@ -8,6 +8,7 @@ import java.util.concurrent.CyclicBarrier;
 public class UseCyclicBarrier {
     static CyclicBarrier cb = new CyclicBarrier(5, new myThread());
     static List list = new ArrayList<>();
+    static ThreadLocal tl = new ThreadLocal();
 
     public static void main(String[] args) {
         System.out.println("start");
@@ -20,8 +21,9 @@ public class UseCyclicBarrier {
     static class myThread extends Thread {
         @Override
         public void run() {
+            System.out.println(Thread.currentThread().getName());
             for (int i=0;i<list.size();i++){
-                System.out.println(list.get(i));
+                System.out.println("---"+tl.get());
             }
 
         }
@@ -31,12 +33,16 @@ public class UseCyclicBarrier {
         @Override
         public void run() {
             try {
-                list.add(Thread.currentThread().getName());
+
                 Random random = new Random();
                 int i = random.nextInt(11);
-                System.out.println("start sleep"+i);
+                System.out.println(Thread.currentThread().getName()+"start sleep"+i);
                 Thread.sleep(i*1000);
+                list.add(Thread.currentThread().getName());
                 cb.await();
+                tl.set(Thread.currentThread().getName());
+
+                System.out.println("都到齐了");
 
             } catch (Exception e) {
 
