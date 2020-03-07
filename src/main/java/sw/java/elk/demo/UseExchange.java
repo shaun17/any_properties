@@ -21,8 +21,6 @@ public class UseExchange {
 
                 Object exchange = ex.exchange(a);
                 System.out.println(exchange.toString()+Thread.currentThread().getName()+"-");
-                TreeSet set = new TreeSet()
-            set.add()
 
             }catch (Exception e){
 

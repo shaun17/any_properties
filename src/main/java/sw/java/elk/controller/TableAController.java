@@ -2,9 +2,7 @@ package sw.java.elk.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jackson.JsonObjectSerializer;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import sw.java.elk.po.Pojo;
 import sw.java.elk.rabbit.IMessageService;
 import sw.java.elk.rabbit.MQConstant;
-import sw.java.elk.service.TableAService;
+import sw.java.elk.service.primary.TableAService;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

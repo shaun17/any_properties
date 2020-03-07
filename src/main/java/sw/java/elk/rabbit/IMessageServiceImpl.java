@@ -20,13 +20,11 @@ public class IMessageServiceImpl implements IMessageService{
     RedisTemplate redisTemplate;
     @Override
     public void send(String queueName, String message) {
-        rabbitTemplate.convertAndSend(MQConstant.ORDER_QUEUE_NAME,queueName, message);
+        rabbitTemplate.convertAndSend(MQConstant.DEFAULT_EXCHANGE,queueName, message);
     }
 
     @Override
     public void send(String queueName, String message, long times) {
-        redisTemplate.opsForValue().set("order", message);
-        redisTemplate.expire("order",10, TimeUnit.SECONDS);
         DLXMessage dlxMessage = new DLXMessage(MQConstant.DEFAULT_EXCHANGE,queueName,message,times);
         MessagePostProcessor processor = new MessagePostProcessor(){
             @Override

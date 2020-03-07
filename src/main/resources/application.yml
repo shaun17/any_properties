@@ -11,9 +11,9 @@ spring:
     primary:
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://120.24.176.239:3306/mallcloud?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
-      username: dfyzADMIN
-      password: dfyz@)!(
+      jdbc-url: jdbc:mysql://106.54.200.122:3306/sw?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+      username: root
+      password: 112200
       # 连接池设置
       initial-size: 10
       min-idle: 5
@@ -42,9 +42,9 @@ spring:
     second:
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://120.79.234.67:3306/dfyz_asset?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
-      username: dfyz
-      password: Dfyz2019.qaz
+      jdbc-url: jdbc:mysql://106.54.200.122:3306/sw?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+      username: root
+      password: 112200
       initial-size: 10
       min-idle: 5
       max-active: 100

@@ -19,6 +19,7 @@ public class RabbitMQConfig {
     @Bean
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(host, port);
+        cachingConnectionFactory.setVirtualHost("order");
         return cachingConnectionFactory;
     }
 

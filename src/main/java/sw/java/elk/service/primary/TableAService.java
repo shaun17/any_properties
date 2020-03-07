@@ -1,4 +1,4 @@
-package sw.java.elk.service;
+package sw.java.elk.service.primary;
 
 import java.util.List;
 import java.util.Map;

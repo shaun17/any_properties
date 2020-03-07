@@ -7,24 +7,26 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-@RabbitListener(queues = MQConstant.DEFAULT_REPEAT_TRADE_QUEUE_NAME)
-public class ReceiverDelayMessage {
+@RabbitListener(queues = MQConstant.ORDER_QUEUE_NAME)
+public class ReceiverMessage {
     @Autowired
     private IMessageService messageService;
     @Autowired
-    private RedisTemplate  redisTemplate;
+    private RedisTemplate redisTemplate;
 
     @RabbitHandler
     public void process(String content) {
-
         Object order = redisTemplate.opsForValue().get(content);
-        if(order!=null){
+        if(order!=null) {
             System.out.println(order.toString());
-            System.out.println("怎么可能查得到？！！！！");
+            System.out.println("查询到订单，还在有效期，支付即成功");
         }else{
-            messageService.print();
+            System.out.println("没有查询到订单，无效支付");
 
         }
+
+
+
 
     }
 }

@@ -23,12 +23,14 @@ import javax.sql.DataSource;
 public class DruidConfiguration {
 
     private static final Logger logger = LoggerFactory.getLogger(DruidConfiguration.class);
-    @Primary
+
+    //@Primary
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource(){
         return new DruidDataSource();
     }
+
     @Bean
     public ServletRegistrationBean druidServlet() {
         logger.info("init Druid Servlet Configuration ");
