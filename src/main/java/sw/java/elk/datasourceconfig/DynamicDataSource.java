@@ -1,4 +1,4 @@
-package sw.java.elk.config;
+package sw.java.elk.datasourceconfig;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

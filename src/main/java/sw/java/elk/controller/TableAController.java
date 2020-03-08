@@ -13,6 +13,8 @@ import sw.java.elk.rabbit.IMessageService;
 import sw.java.elk.rabbit.MQConstant;
 import sw.java.elk.service.primary.TableAService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +30,13 @@ public class TableAController {
     IMessageService iMessageService;
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public Object get() {
+    public Object get(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        System.out.println(session);
+        return tableAService.queryList();
+    }
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    public Object find() {
         return tableAService.queryList();
     }
 

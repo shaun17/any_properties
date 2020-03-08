@@ -11,8 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.redis.core.RedisTemplate;
+import sw.java.elk.po.User;
 import sw.java.elk.rabbit.IMessageService;
 import sw.java.elk.rabbit.MQConstant;
+import sw.java.elk.service.primary.UserService;
+import sw.java.elk.util.PasswordUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,13 +34,29 @@ public class EklApplication implements CommandLineRunner {
     RedisTemplate redisTemplate;
 
 //    @Override
-    public void run(String... args) throws Exception {
-        Logger logger = LoggerFactory.getLogger(EklApplication.class);
-        logger.info("开始模拟提交订单");
-        redisTemplate.opsForValue().set("order","1234567",20, TimeUnit.SECONDS);
+//    public void run(String... args) throws Exception {
+//        Logger logger = LoggerFactory.getLogger(EklApplication.class);
+//        logger.info("开始模拟提交订单");
+//        redisTemplate.opsForValue().set("order","1234567",20, TimeUnit.SECONDS);
+//
+//        logger.info("订单完成了，只有20s的时间去支付");
+//        messageService.send(MQConstant.ORDER_QUEUE_NAME,"order",20000);
+//        messageService.send(MQConstant.ORDER_QUEUE_NAME,"order");
+//    }
 
-        logger.info("订单完成了，只有20s的时间去支付");
-        messageService.send(MQConstant.ORDER_QUEUE_NAME,"order",20000);
-        messageService.send(MQConstant.ORDER_QUEUE_NAME,"order");
+    //成功打印
+    @Autowired
+    sw.java.elk.service.primary.UserService UserService;
+    @Override
+    public void run(String... args) throws Exception {
+
+//    User user = new User();
+//    user.setPassword("123456");
+//    user.setUserName("tom");
+//    user = PasswordUtils.toMD5(user);
+//        System.out.println(user);
+//        UserService.insert(user);
+
     }
+
 }

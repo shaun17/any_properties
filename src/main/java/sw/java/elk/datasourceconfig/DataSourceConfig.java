@@ -1,4 +1,4 @@
-package sw.java.elk.config;
+package sw.java.elk.datasourceconfig;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@MapperScan(basePackages = " sw.java.elk.dao", sqlSessionFactoryRef = "SqlSessionFactory")
+@MapperScan(basePackages = "sw.java.elk.dao", sqlSessionFactoryRef = "SqlSessionFactory")
 public class DataSourceConfig {
     @Primary
     @Bean(name = "DataSourcePrimary")

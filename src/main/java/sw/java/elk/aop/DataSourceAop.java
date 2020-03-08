@@ -3,7 +3,7 @@ package sw.java.elk.aop;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
-import sw.java.elk.config.DataSourceType;
+import sw.java.elk.datasourceconfig.DataSourceType;
 
 @Aspect
 @Component

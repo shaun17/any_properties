@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sw.java.elk.dao.UserDao">
+    <resultMap id="user" type="sw.java.elk.po.User">
+        <id column="id" property="id"></id>
+        <result column="user_name" property="userName"></result>
+        <result column="password" property="password"></result>
+        <result column="salt" property="salt"></result>
+        <result column="times" property="times"></result>
+        <collection property="roles" ofType="sw.java.elk.po.Role">
+            <id column="rid" property="id"></id>
+            <result column="role_name" property="roleName"></result>
+            <collection property="pers" ofType="sw.java.elk.po.Permission">
+                <id column="pid" property="id"></id>
+                <result column="permission_name" property="permissionName"></result>
+            </collection>
+        </collection>
+    </resultMap>
+
+
+    <insert id="insert" parameterType="sw.java.elk.po.User">
+        insert into user (user_name,password,salt,times) values
+        (#{userName},#{password},#{salt},#{times})
+    </insert>
+
+    <select id="findByName" resultMap="user" parameterType="String">
+       select * from user u
+       left join user_role ur on u.id=ur.user_id
+       left join role r on r.id=ur.role_id
+        LEFT JOIN role_permission rp on rp.role_id=r.id
+        left join permission p on p.id=rp.permission_id
+        where u.user_name = #{username}
+    </select>
+</mapper>

@@ -9,6 +9,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import sw.java.elk.po.Pojo;
+import sw.java.elk.po.User;
+import sw.java.elk.service.primary.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,5 +41,14 @@ public class EklApplicationTests {
         System.out.println(redisTemplate.opsForHash().entries("one"));
 
     }
+    @Autowired
+    UserService userService;
+    @Test
+    public void method(){
+        User tom = userService.findByName("tom");
+        System.out.println(tom);
+
+    }
+
 
 }

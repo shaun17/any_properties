@@ -17,7 +17,7 @@ spring:
       # 连接池设置
       initial-size: 10
       min-idle: 5
-      max-active: 100
+      max-active: 20
       # 配置获取连接等待超时的时间
       max-wait: 60000
       # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
@@ -60,6 +60,8 @@ spring:
       filters: stat,wall,slf4j
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       use-global-data-source-stat: true
+  main:
+    allow-bean-definition-overriding: true
 
 
 
