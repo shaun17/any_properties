@@ -9,7 +9,8 @@ public class Demo {
         int[] array = new int[]{6, 3, 4, 1, 7, 0, 8, 9, 5};
 //        System.out.println(Arrays.toString(maopao(array)));
         System.out.println(Arrays.toString(kuaisu(0, array.length - 1, array)));
-        ;
+
+
 
 
     }
