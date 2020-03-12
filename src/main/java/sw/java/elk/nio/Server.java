@@ -15,7 +15,7 @@ public class Server {
         //创建通道
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         //获取文件通道
-        FileChannel fileChannel = FileChannel.open(Paths.get("/Users/shaun/Desktop/demo.png"), StandardOpenOption.WRITE, StandardOpenOption.CREATE);
+        FileChannel fileChannel = FileChannel.open(Paths.get("C:\\Users\\admin\\Desktop\\demo.png"), StandardOpenOption.WRITE, StandardOpenOption.CREATE);
         //绑定
         serverSocketChannel.bind(new InetSocketAddress(6666));
         //创建缓冲
@@ -23,7 +23,7 @@ public class Server {
         //获取客户端
         SocketChannel accept = serverSocketChannel.accept();
 
-        while (accept.read(byteBuffer) != 1) {
+        while (accept.read(byteBuffer) != -1) {
             byteBuffer.flip();
             fileChannel.write(byteBuffer);
             byteBuffer.clear();

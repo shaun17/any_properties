@@ -1,9 +1,5 @@
 package sw.java.elk.nio;
 
-import sun.nio.ch.sctp.Shutdown;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -19,7 +15,7 @@ public class Client {
         //开启传输通道
         SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("127.0.0.1", 6666));
         //开启读取通道
-        FileChannel fileChannel = FileChannel.open(Paths.get("/Users/shaun/Downloads/Mario.png"), StandardOpenOption.READ);
+        FileChannel fileChannel = FileChannel.open(Paths.get("C:\\Users\\admin\\Pictures\\Mario.jpg"), StandardOpenOption.READ);
         //创建缓冲
         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
         while (fileChannel.read(byteBuffer) != -1) {

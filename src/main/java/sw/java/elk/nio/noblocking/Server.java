@@ -9,11 +9,12 @@ import java.nio.channels.*;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Iterator;
+import java.util.Set;
 
 public class Server {
     public static void main(String[] args) throws IOException {
         //获取通道
-        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+            ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         //设置非阻塞
         serverSocketChannel.configureBlocking(false);
         //绑定
@@ -21,7 +22,7 @@ public class Server {
         //获取选择器
         Selector open = Selector.open();
         //将通道注册到选择器上
-        serverSocketChannel.register(open, SelectionKey.OP_ACCEPT);
+        SelectionKey register = serverSocketChannel.register(open, SelectionKey.OP_ACCEPT);
         //5. 轮训地获取选择器上已“就绪”的事件--->只要select()>0，说明已就绪
         while (open.select() > 0) {
             //当前选择器所以的事件
@@ -32,7 +33,7 @@ public class Server {
                 if (next.isAcceptable()) {
                     // 8. 获取客户端的链接
                     SocketChannel accept = serverSocketChannel.accept();
-                    //设置非阻塞
+                    //设置非阻塞 
                     accept.configureBlocking(false);
                     //拿到客户端获取读事件数据
                     accept.register(open, SelectionKey.OP_READ);
@@ -40,15 +41,22 @@ public class Server {
                     // 9. 获取当前选择器读就绪状态的通道
                     SocketChannel channel = (SocketChannel) next.channel();
                     ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
-                    FileChannel fileChannel = FileChannel.open(Paths.get("/Users/shaun/Desktop/demo.png"), StandardOpenOption.WRITE, StandardOpenOption.CREATE);
+                    FileChannel fileChannel = FileChannel.open(Paths.get("C:\\Users\\admin\\Desktop\\demo.png"), StandardOpenOption.WRITE, StandardOpenOption.CREATE);
                     while (channel.read(byteBuffer) > 0) {
                         byteBuffer.flip();
                         fileChannel.write(byteBuffer);
                         byteBuffer.clear();
                     }
+                    ByteBuffer write = ByteBuffer.allocate(2014);
+                    write.put("this is callback".getBytes());
+                    write.flip();
+                    channel.write(write);
                 }
+                iterator.remove();
             }
-            iterator.remove();
+
+
+
         }
     }
 }
