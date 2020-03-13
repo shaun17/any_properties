@@ -31,14 +31,13 @@ public class ClientSelector {
                 if(next.isReadable()){
                     SocketChannel channel = (SocketChannel)next.channel();
                     ByteBuffer byteBuffer1 = ByteBuffer.allocate(1024);
-                    int read = channel.read(byteBuffer1);
+                    int read = channel.read(byteBuffer);
                     if(read>0){
                         byteBuffer1.flip();
                         System.out.println(new String(byteBuffer1.array(),0,read));
                     }
                 }
                 iterator.remove();
-
             }
 
         }
