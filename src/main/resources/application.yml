@@ -62,6 +62,12 @@ spring:
       use-global-data-source-stat: true
   main:
     allow-bean-definition-overriding: true
+  data:
+    elasticsearch:
+      cluster-name: mall-es
+      cluster-nodes: 106.54.200.122:9300
+      repositories:
+        enabled: true
 
 
 
@@ -76,5 +82,4 @@ mybatis:
 logging:
   level:
     sw.java.elk.dao: debug
-
 
