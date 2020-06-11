@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Slf4j
 public class Demo
 {
     public static void main(String[] args) throws  Exception{

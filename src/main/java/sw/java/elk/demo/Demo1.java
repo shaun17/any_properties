@@ -39,7 +39,5 @@ public class Demo1 {
         th.join();
         System.out.println(de.getId());
         System.out.println(de.getName());
-        Vector v = new Vector();
-        v.add("q");
     }
 }

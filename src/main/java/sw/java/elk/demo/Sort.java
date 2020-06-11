@@ -2,7 +2,7 @@ package sw.java.elk.demo;
 
 import java.util.Arrays;
 
-public class Demo {
+public class Sort {
     private int[] array;
 
     public static void main(String[] args) {

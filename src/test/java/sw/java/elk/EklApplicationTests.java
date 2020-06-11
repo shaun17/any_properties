@@ -13,6 +13,7 @@ import sw.java.elk.po.User;
 import sw.java.elk.service.primary.UserService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,33 +23,77 @@ public class EklApplicationTests {
     @Autowired
     RedisTemplate redisTemplate;
 
-    @Test
-    public void test() {
-//        Pojo po = new Pojo();
-//        po.setName("pojo");
-//        po.setHobby("computer");
-//        po.setAge(12);
-//        po.setAddress("beijing");
-        Map map = new HashMap();
-        map.put("name", "shaun");
-        map.put("age", "12");
-        map.put("addr", "shanghai");
 
-//        redisTemplate.setHashValueSerializer(new StringRedisSerializer());
-        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-        redisTemplate.opsForHash().put("one","name","tom");
-        redisTemplate.opsForHash().put("one","age",12);
-        System.out.println(redisTemplate.opsForHash().entries("one"));
+    class Colther {
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+
+        public void setColor(String color) {
+            this.color = color;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        private String name;
+        private double price;
+        private String color;
+        private int age;
+
+        public String getName() {
+            return name;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public String getColor() {
+            return color;
+        }
+
+        public int getAge() {
+            return age;
+        }
+    }
+
+    @Test
+    public void insertCart() {
+        Colther clo = new Colther();
+        clo.setAge(12);
+        clo.setName("jack");
+        clo.setPrice(12.3);
+        clo.setColor("黑色");
+        System.out.println(JSONObject.toJSONString(clo));
+        redisTemplate.opsForHash().put("cart:userId_123456","0003", JSONObject.toJSONString(clo));
+    }
+
+    @Test
+    public void findCart() {
+        List values = redisTemplate.opsForHash().values("cart:userId_123456");
+        System.out.println(values);
 
     }
-    @Autowired
-    UserService userService;
-    @Test
-    public void method(){
-        User tom = userService.findByName("tom");
-        System.out.println(tom);
 
+    @Test
+    public void updateCart() {
+        Colther clo = new Colther();
+        clo.setAge(12);
+        clo.setName("小jack");
+        clo.setPrice(12.3);
+        clo.setColor("大红色");
+       redisTemplate.opsForHash().put("cart:userId_123456","0003",JSONObject.toJSONString(clo));
     }
 
-
+    @Test
+    public void delCart() {
+        Object o = redisTemplate.opsForHash().get("hmset", "name");
+        System.out.println(o);
+    }
 }
