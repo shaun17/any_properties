@@ -6,6 +6,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import java.util.Date;
+
 //用 data的注解 document 指定 索引名，和类型，这里为了测试方便，我随便起的名字
 @Document(indexName = "javaestest",type = "aaa")
 @Data
@@ -16,5 +18,8 @@ public class RequestLog {
     private String orderNo;
     private String userId;
     private String userName;
+    private int age;
+    private Date birthday;
+    private double price;
     private String createTime;
 }
