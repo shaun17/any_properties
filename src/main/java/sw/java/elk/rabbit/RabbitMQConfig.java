@@ -15,11 +15,17 @@ public class RabbitMQConfig {
     private String host;
     @Value("${spring.rabbitmq.port}")
     private int port;
+    @Value("${spring.rabbitmq.username}")
+    private String username;
+    @Value("${spring.rabbitmq.password}")
+    private String password;
 
     @Bean
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(host, port);
-        cachingConnectionFactory.setVirtualHost("order");
+        cachingConnectionFactory.setUsername(username);
+        cachingConnectionFactory.setPassword(password);
+//        cachingConnectionFactory.setVirtualHost("order");
         return cachingConnectionFactory;
     }
 

@@ -21,7 +21,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-@Component
+//@Component
 public class MyRealm extends AuthorizingRealm {
     @Resource
     private UserService userInfoService;

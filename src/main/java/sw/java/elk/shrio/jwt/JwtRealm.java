@@ -2,6 +2,7 @@ package sw.java.elk.shrio.jwt;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import io.netty.handler.codec.json.JsonObjectDecoder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -33,8 +34,9 @@ public class JwtRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String  username = (String) principals.getPrimaryPrincipal();
-        JSON o = (JSON)redisTemplate.opsForValue().get(username);
-        User user = JSONObject.toJavaObject(o, User.class);
+        String s = redisTemplate.opsForValue().get(username).toString();
+        JSONObject jsonObject = JSONObject.parseObject(s);
+       User user = JSONObject.toJavaObject(jsonObject, User.class);
 
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         for (Role role : user.getRoles()) {
@@ -61,7 +63,7 @@ public class JwtRealm extends AuthorizingRealm {
 //                throw new UnknownAccountException();
 //        }
         //下面是验证这个user是否是真实存在的
-        String username = (String) jwtUtil.decode(jwt).get("tom");//判断数据库中username是否存在
+        String username = (String) jwtUtil.decode(jwt).getSubject();//判断数据库中username是否存在
         log.info("在使用token登录"+username);
         return new SimpleAuthenticationInfo(username,jwt,"JwtRealm");
         //这里返回的是类似账号密码的东西，但是jwtToken都是jwt字符串。还需要一个该Realm的类名

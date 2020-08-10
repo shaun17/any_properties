@@ -7,6 +7,8 @@ spring:
   rabbitmq:
     host: 47.113.102.247
     port: 5672
+    username: admin
+    password: admin
   datasource:
     primary:
       type: com.alibaba.druid.pool.DruidDataSource
@@ -64,10 +66,9 @@ spring:
     allow-bean-definition-overriding: true
   data:
     elasticsearch:
+      cluster-nodes: 106.54.200.122:9300,106.54.200.122:9301,106.54.200.122:9302
       cluster-name: mall-es
-      cluster-nodes: 106.54.200.122:9300
-      repositories:
-        enabled: true
+
 
 
 

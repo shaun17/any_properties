@@ -7,12 +7,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 /*
  * 总的来说，工具类中有三个方法
  * 获取JwtToken，获取JwtToken中封装的信息，判断JwtToken是否存在
@@ -20,6 +22,7 @@ import java.util.UUID;
  * 2. decode()，参数是=JwtToken=。返回值是荷载部分的键值对
  * 3. isVerify()，参数是=JwtToken=。返回值是这个JwtToken是否存在
  * */
+@Slf4j
 public class JwtUtil {
     //创建默认的秘钥和算法，供无参的构造方法使用
     private static final String defaultbase64EncodedSecretKey = "badbabe";
@@ -113,7 +116,8 @@ public class JwtUtil {
 
         String jwtToken = util.encode("tom", 30000, map);
 
-        System.out.println(jwtToken);
+        log.info(jwtToken);
+        log.info(util.decode(jwtToken).getSubject());
         util.decode(jwtToken).entrySet().forEach((entry) -> {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         });

@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class EklApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
+        System.setProperty("es.set.netty.runtime.available.processors", "false");
         ConfigurableApplicationContext run = SpringApplication.run(EklApplication.class, args);
 
     }
