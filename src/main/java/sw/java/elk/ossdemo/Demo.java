@@ -5,22 +5,47 @@ import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.GetObjectRequest;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.aliyun.oss.model.PutObjectResult;
+import org.apache.tomcat.util.security.MD5Encoder;
+import sw.java.elk.util.RSAUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.util.Arrays;
+import java.util.Base64;
 
 public class Demo {
     // Endpoint以杭州为例，其它Region请按实际情况填写。
     static String endpoint = "oss-cn-shenzhen.aliyuncs.com";
     // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
-    static String accessKeyId = "LTAI4FsjUYeCudKXpR yc7oZu";
-    static String accessKeySecret = "rGpD9DEuK2m27jFGRnGCcXLq852w8l";
+    static String accessKeyId;
+    public final static String pri_k="MIIBVQIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEAlJGfVHaVdvV6sDBa1klGQNnZEfeMJOaYUBuJTWqGaVfr+w8Cqlo3ytt+iwQUeEX8O5/ZDwp3Vx25yO7i8gRRcwIDAQABAkArthScsy8SivMH95IiTfi/h9jX8m9nQ/k4SIHDJz5Yq7K4BUgVQJIpywrCxpWhaOU7FEF3wHxx2kWcmQ27z/ThAiEA7JfnllbETRhfTmTDZQ/Bufjaerao49Q2cDwPMNdnNZkCIQCgwVaiK2ATFHNdc6M4DSqbRIfB+RUFQtIodBBxb23O6wIhAMCEmx3qXLGfM25G7/g8ahc6OA3CtIsvE10ggfvsSz+BAiBfEbgQdCJ/ZirL66Vtcqvt41t+JbZ+xAPRlMJcs493PQIhAKdoCx0uHmlGnmPGovXCDLmOhCGcYqcgmMbsrslDFVkP";
+
+    static String accessKeySecret;
+
+    static {
+        try {
+            accessKeySecret = RSAUtils.decrypt("av4C5ajgTSTX1sQDKakODdzEPjxnWig4jZBiSkKt8/c64YsKf6EGr45rxAf9dpwfKYs3pHQs7UXOVWbXquRAxA==", RSAUtils.getPrivateKey(pri_k));
+            accessKeyId =  RSAUtils.decrypt("c7W2cdVOPx9piLCA9O+RFDsARWQZnknVyymlk/xDZaeeDeQfNc80P29wF3SsFaQ0kSjhBP3pf2ht/CgXXrhFYw==", RSAUtils.getPrivateKey(pri_k));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     static String bucketName = "shaun-oss";
 
 
-    public static void main(String[] args) {
+    final static String pub_k="MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJSRn1R2lXb1erAwWtZJRkDZ2RH3jCTmmFAbiU1qhmlX6/sPAqpaN8rbfosEFHhF/Duf2Q8Kd1cducju4vIEUXMCAwEAAQ==";
 
-        upload();
+
+
+    public static void main(String[] args) throws Exception {
+
+        //upload();
+        String encrypt = RSAUtils.encrypt(accessKeyId, RSAUtils.getPublicKey(pub_k));
+        System.out.println(encrypt);
+        String decryptData =RSAUtils.decrypt("c7W2cdVOPx9piLCA9O+RFDsARWQZnknVyymlk/xDZaeeDeQfNc80P29wF3SsFaQ0kSjhBP3pf2ht/CgXXrhFYw==", RSAUtils.getPrivateKey(pri_k));
+
+        System.out.println("解密后内容:" + decryptData);
 
 
     }

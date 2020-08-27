@@ -1,6 +1,5 @@
 package sw.java.elk.demo;
 
-import sun.invoke.util.VerifyAccess;
 
 import java.util.Collections;
 import java.util.Vector;
