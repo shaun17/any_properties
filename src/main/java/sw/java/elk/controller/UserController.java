@@ -1,6 +1,7 @@
 package sw.java.elk.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ser.std.StringSerializer;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -55,5 +56,25 @@ public class UserController {
     @ResponseBody
     public String index() {
         return "no permission";
+    }
+
+    @RequestMapping("/redis")
+    @ResponseBody
+    public String redis() {
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new StringRedisSerializer());
+        Object aaa = redisTemplate.opsForValue().get("dsf");
+        return aaa.toString();
+
+    }
+
+    @RequestMapping("/redis/set")
+    @ResponseBody
+    public String set(String str) {
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new StringRedisSerializer());
+       redisTemplate.opsForValue().set(str,str);
+        return "success";
+
     }
 }

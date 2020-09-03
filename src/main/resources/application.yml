@@ -2,8 +2,9 @@ server:
   port: 8080
 spring:
   redis:
-    host: 106.54.200.122
-    port: 6666
+    sentinel:
+      nodes: 106.54.200.122:26379,106.54.200.122:26380,106.54.200.122:26381
+      master: mymaster
   rabbitmq:
     host: 47.113.102.247
     port: 5672
