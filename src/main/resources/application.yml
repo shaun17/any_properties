@@ -83,5 +83,7 @@ mybatis:
     map-underscore-to-camel-case: true
 logging:
   level:
-    sw.java.elk.dao: debug
+    sw.java.elk.dao:
+
+
 
