@@ -71,7 +71,7 @@ public class EklApplicationTests {
         clo.setPrice(12.3);
         clo.setColor("黑色");
         System.out.println(JSONObject.toJSONString(clo));
-        redisTemplate.opsForHash().put("cart:userId_123456","0003", JSONObject.toJSONString(clo));
+        redisTemplate.opsForHash().put("cart:userId_123456", "0003", JSONObject.toJSONString(clo));
     }
 
     @Test
@@ -88,7 +88,7 @@ public class EklApplicationTests {
         clo.setName("小jack");
         clo.setPrice(12.3);
         clo.setColor("大红色");
-       redisTemplate.opsForHash().put("cart:userId_123456","0003",JSONObject.toJSONString(clo));
+        redisTemplate.opsForHash().put("cart:userId_123456", "0003", JSONObject.toJSONString(clo));
     }
 
     @Test
@@ -96,4 +96,11 @@ public class EklApplicationTests {
         Object o = redisTemplate.opsForHash().get("hmset", "name");
         System.out.println(o);
     }
+
+    @Test
+    public void method() {
+        assert 1 == 2;
+        System.out.printf("aaaa");
+    }
+
 }

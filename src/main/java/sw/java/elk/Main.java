@@ -1,13 +1,25 @@
 package sw.java.elk;
 
-import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
-    public static void main(String[] args) {
-        String pub = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEoprRgU9Bph/EH7FiGgaSFgygAvI7ExXAdFzUbq1HKynMl7eCX0WpJAb7dWhCEcazYb95xtgRdE7ooAWkfTY25g==";
-        System.out.println(pub.getBytes().length * 3 /4);
-        String pri = "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg981ZNqKt/8uW30rwInWqxH/hmJrcE1yCOo5eFgCE/fChRANCAASyO1mFX3m5WKdFRlRG5GhzylskPQnolgX+w2VHzJ001duRhe7Cs+GUqhk7oxE/pXiDFSRBgyNkUY510Urj/Kjs";
-        System.out.println(pri.getBytes().length* 3 /4);
-        System.out.println(Arrays.toString(new byte[93]));
+    public static void main(String[] args) throws Exception{
+       switch (1){
+           case 1:
+               System.out.println(111);
+               return;
+       }
+
+        System.out.println(222);
+
+
+    }
+    private  void method( Map map){
+        map.put("a","a");
+        map.put("b","b");
+        map.put("c","c");
+        map.put("d","d");
     }
 }
