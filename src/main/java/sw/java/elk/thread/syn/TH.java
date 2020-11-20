@@ -1,4 +1,4 @@
-package sw.java.elk.demo.syn;
+package sw.java.elk.thread.syn;
 
 public class TH extends Thread {
    static final Object o = new Object();
@@ -7,7 +7,7 @@ public class TH extends Thread {
         synchronized (o) {
             System.out.println("synchronized");
             try {
-                Thread.currentThread().sleep(3000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -1,8 +1,5 @@
-package sw.java.elk.demo;
+package sw.java.elk.thread;
 
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.Exchanger;
 
 public class UseExchange {

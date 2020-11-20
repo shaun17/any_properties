@@ -1,9 +1,5 @@
-package sw.java.elk.demo;
+package sw.java.elk.thread;
 
-
-import java.util.Collections;
-import java.util.Vector;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class Demo1 {
     ThreadLocal id = new ThreadLocal();

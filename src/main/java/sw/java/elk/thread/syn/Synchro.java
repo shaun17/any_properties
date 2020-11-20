@@ -1,4 +1,4 @@
-package sw.java.elk.demo.syn;
+package sw.java.elk.thread.syn;
 
 public class Synchro {
      Object o = new Object();
