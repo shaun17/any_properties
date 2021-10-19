@@ -41,7 +41,7 @@ public class JwtUserController {
         JwtUtil jwtUtil = new JwtUtil();
         String encode = jwtUtil.encode(username, 100000, null);
         User byName = userService.findByName(username);
-        log.info(JSONObject.toJSONString(byName));
+        logger.info(JSONObject.toJSONString(byName));
         redisTemplate.opsForValue().set(username, JSONObject.toJSONString(byName));
         Subject subject = SecurityUtils.getSubject();
 //        JwtToken jwtToken = new JwtToken(encode);

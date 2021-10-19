@@ -2,19 +2,18 @@ server:
   port: 8080
 spring:
   redis:
-    sentinel:
-      nodes: 106.54.200.122:26379,106.54.200.122:26380,106.54.200.122:26381
-      master: mymaster
+    host: 47.113.102.247
+    port: 6379
   rabbitmq:
     host: 47.113.102.247
     port: 5672
-    username: admin
-    password: admin
+    username: guest
+    password: guest
   datasource:
     primary:
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://106.54.200.122:3306/sw?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+      jdbc-url: jdbc:mysql://47.113.102.247:3306/sw_db?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
       username: root
       password: 112200
       # 连接池设置
@@ -45,7 +44,7 @@ spring:
     second:
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://106.54.200.122:3306/sw?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+      jdbc-url: jdbc:mysql://47.113.102.247:3306/sw_db?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
       username: root
       password: 112200
       initial-size: 10
@@ -67,8 +66,8 @@ spring:
     allow-bean-definition-overriding: true
   data:
     elasticsearch:
-      cluster-nodes: 106.54.200.122:9300,106.54.200.122:9301,106.54.200.122:9302
-      cluster-name: mall-es
+#      cluster-nodes: 106.54.200.122:9300,106.54.200.122:9301,106.54.200.122:9302
+#      cluster-name: mall-es
 
 
 

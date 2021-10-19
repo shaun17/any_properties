@@ -18,14 +18,14 @@ public class Demo {
     static String endpoint = "oss-cn-shenzhen.aliyuncs.com";
     // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
     static String accessKeyId;
-    public final static String pri_k="MIIBVQIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEAlJGfVHaVdvV6sDBa1klGQNnZEfeMJOaYUBuJTWqGaVfr+w8Cqlo3ytt+iwQUeEX8O5/ZDwp3Vx25yO7i8gRRcwIDAQABAkArthScsy8SivMH95IiTfi/h9jX8m9nQ/k4SIHDJz5Yq7K4BUgVQJIpywrCxpWhaOU7FEF3wHxx2kWcmQ27z/ThAiEA7JfnllbETRhfTmTDZQ/Bufjaerao49Q2cDwPMNdnNZkCIQCgwVaiK2ATFHNdc6M4DSqbRIfB+RUFQtIodBBxb23O6wIhAMCEmx3qXLGfM25G7/g8ahc6OA3CtIsvE10ggfvsSz+BAiBfEbgQdCJ/ZirL66Vtcqvt41t+JbZ+xAPRlMJcs493PQIhAKdoCx0uHmlGnmPGovXCDLmOhCGcYqcgmMbsrslDFVkP";
+    public final static String pri_k = "MIIBVQIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEAlJGfVHaVdvV6sDBa1klGQNnZEfeMJOaYUBuJTWqGaVfr+w8Cqlo3ytt+iwQUeEX8O5/ZDwp3Vx25yO7i8gRRcwIDAQABAkArthScsy8SivMH95IiTfi/h9jX8m9nQ/k4SIHDJz5Yq7K4BUgVQJIpywrCxpWhaOU7FEF3wHxx2kWcmQ27z/ThAiEA7JfnllbETRhfTmTDZQ/Bufjaerao49Q2cDwPMNdnNZkCIQCgwVaiK2ATFHNdc6M4DSqbRIfB+RUFQtIodBBxb23O6wIhAMCEmx3qXLGfM25G7/g8ahc6OA3CtIsvE10ggfvsSz+BAiBfEbgQdCJ/ZirL66Vtcqvt41t+JbZ+xAPRlMJcs493PQIhAKdoCx0uHmlGnmPGovXCDLmOhCGcYqcgmMbsrslDFVkP";
 
     static String accessKeySecret;
 
     static {
         try {
             accessKeySecret = RSAUtils.decrypt("av4C5ajgTSTX1sQDKakODdzEPjxnWig4jZBiSkKt8/c64YsKf6EGr45rxAf9dpwfKYs3pHQs7UXOVWbXquRAxA==", RSAUtils.getPrivateKey(pri_k));
-            accessKeyId =  RSAUtils.decrypt("c7W2cdVOPx9piLCA9O+RFDsARWQZnknVyymlk/xDZaeeDeQfNc80P29wF3SsFaQ0kSjhBP3pf2ht/CgXXrhFYw==", RSAUtils.getPrivateKey(pri_k));
+            accessKeyId = RSAUtils.decrypt("c7W2cdVOPx9piLCA9O+RFDsARWQZnknVyymlk/xDZaeeDeQfNc80P29wF3SsFaQ0kSjhBP3pf2ht/CgXXrhFYw==", RSAUtils.getPrivateKey(pri_k));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,8 +34,7 @@ public class Demo {
     static String bucketName = "shaun-oss";
 
 
-    final static String pub_k="MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJSRn1R2lXb1erAwWtZJRkDZ2RH3jCTmmFAbiU1qhmlX6/sPAqpaN8rbfosEFHhF/Duf2Q8Kd1cducju4vIEUXMCAwEAAQ==";
-
+    final static String pub_k = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJSRn1R2lXb1erAwWtZJRkDZ2RH3jCTmmFAbiU1qhmlX6/sPAqpaN8rbfosEFHhF/Duf2Q8Kd1cducju4vIEUXMCAwEAAQ==";
 
 
     public static void main(String[] args) throws Exception {
@@ -43,14 +42,14 @@ public class Demo {
         //upload();
         String encrypt = RSAUtils.encrypt(accessKeyId, RSAUtils.getPublicKey(pub_k));
         System.out.println(encrypt);
-        String decryptData =RSAUtils.decrypt("c7W2cdVOPx9piLCA9O+RFDsARWQZnknVyymlk/xDZaeeDeQfNc80P29wF3SsFaQ0kSjhBP3pf2ht/CgXXrhFYw==", RSAUtils.getPrivateKey(pri_k));
+        String decryptData = RSAUtils.decrypt("c7W2cdVOPx9piLCA9O+RFDsARWQZnknVyymlk/xDZaeeDeQfNc80P29wF3SsFaQ0kSjhBP3pf2ht/CgXXrhFYw==", RSAUtils.getPrivateKey(pri_k));
 
         System.out.println("解密后内容:" + decryptData);
 
 
     }
 
-    public static void upload(){
+    public static void upload() {
 
 // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
@@ -72,7 +71,7 @@ public class Demo {
     }
 
 
-    public static void downLoad(){
+    public static void downLoad() {
         String objectName = "rabbit.jpg";
 // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
@@ -82,7 +81,7 @@ public class Demo {
         ossClient.shutdown();
     }
 
-    public static void ifExit(){
+    public static void ifExit() {
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
 
 // 判断文件是否存在。doesObjectExist还有一个参数isOnlyInOSS，如果为true则忽略302重定向或镜像；如果
