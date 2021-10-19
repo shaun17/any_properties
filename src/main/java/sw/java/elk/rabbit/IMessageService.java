@@ -15,7 +15,7 @@ public interface IMessageService {
      * @param message 消息内容
      * @param times 延迟时间 单位毫秒
      */
-    public void send(String queueName,String message,long times);
+    public void sendDeadLetter(String queueName,String message,long times);
 
     public void print();
 

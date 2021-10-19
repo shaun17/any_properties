@@ -16,15 +16,15 @@ import java.util.concurrent.TimeUnit;
 public class IMessageServiceImpl implements IMessageService{
     @Autowired
     RabbitTemplate rabbitTemplate;
-    @Autowired
-    RedisTemplate redisTemplate;
+
+
     @Override
     public void send(String queueName, String message) {
         rabbitTemplate.convertAndSend(MQConstant.DEFAULT_EXCHANGE,queueName, message);
     }
 
     @Override
-    public void send(String queueName, String message, long times) {
+    public void sendDeadLetter(String queueName, String message, long times) {
         DLXMessage dlxMessage = new DLXMessage(MQConstant.DEFAULT_EXCHANGE,queueName,message,times);
         MessagePostProcessor processor = new MessagePostProcessor(){
             @Override
@@ -36,6 +36,7 @@ public class IMessageServiceImpl implements IMessageService{
         rabbitTemplate.convertAndSend(MQConstant.DEFAULT_EXCHANGE,MQConstant.DEFAULT_DEAD_LETTER_QUEUE_NAME, JSONObject.toJSONString(dlxMessage), processor);
 
     }
+
     @Override
     public void print(){
         System.out.println("这里是规定时间没有处理，订单自动取消了");

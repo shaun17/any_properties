@@ -29,6 +29,7 @@ public class EklApplication implements CommandLineRunner {
         ConfigurableApplicationContext run = SpringApplication.run(EklApplication.class, args);
 
     }
+
     @Autowired
     IMessageService messageService;
     @Autowired

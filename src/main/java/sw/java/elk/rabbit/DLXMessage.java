@@ -7,6 +7,7 @@ public class DLXMessage implements Serializable {
     private String exchange;
     private String queueName;
     private String content;
+
     public DLXMessage() {
         super();
     }

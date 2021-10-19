@@ -23,7 +23,7 @@ import sw.java.elk.service.primary.UserService;
 import sw.java.elk.shrio.jwt.JwtToken;
 import sw.java.elk.shrio.jwt.JwtUtil;
 
-@RestController
+//@RestController
 @Slf4j
 public class JwtUserController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());

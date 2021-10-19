@@ -78,7 +78,7 @@ public class TableAController {
         map.put("orderDetile", "abcdefg");
         map.put("orderTime", LocalDateTime.now());
 
-        iMessageService.send(MQConstant.ORDER_QUEUE_NAME, JSONObject.toJSONString(map), 10000);
+        iMessageService.sendDeadLetter(MQConstant.DEFAULT_QUEUE, JSONObject.toJSONString(map), 10000);
 
         return "success";
     }
@@ -89,7 +89,7 @@ public class TableAController {
         map.put("orderDetile", "abcdefg");
         map.put("orderTime", LocalDateTime.now());
 
-        iMessageService.send(MQConstant.ORDER_QUEUE_NAME, JSONObject.toJSONString(map), 10000);
+        iMessageService.sendDeadLetter(MQConstant.DEFAULT_QUEUE, JSONObject.toJSONString(map), 10000);
 
         return "success";
     }
