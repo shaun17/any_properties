@@ -6,8 +6,11 @@ public class MQConstant {
     //exchange name
     public static final String DEFAULT_EXCHANGE = "my_default_exchange";
 
-    //Hello 测试消息队列名称
+    //queue name
     public static final String DEFAULT_QUEUE = "default_queue";
+
+    //routing name
+    public static final String DEFAULT_ROUT = "default_routing";
 
 
     //TTL QUEUE

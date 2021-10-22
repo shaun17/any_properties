@@ -1,27 +1,26 @@
 package sw.java.elk.rabbit;
 
-import org.springframework.amqp.core.Message;
-
 import java.io.Serializable;
 
-public class DLXMessage implements Serializable {
-    private static final long serialVersionUID = 1707265941955225348L;
+public class SimpleMessage implements Serializable {
+    private static final long serialVersionUID = 985013887184088188L;
     private String exchange;
     private String queueName;
     private String content;
+    private long times;
 
-    public DLXMessage() {
+    public SimpleMessage() {
         super();
     }
 
-    public DLXMessage(String queueName, String content, long times) {
+    public SimpleMessage(String queueName, String content, long times) {
         super();
         this.queueName = queueName;
         this.content = content;
         this.times = times;
     }
 
-    public DLXMessage(String exchange, String queueName, String content, long times) {
+    public SimpleMessage(String exchange, String queueName, String content, long times) {
         super();
         this.exchange = exchange;
         this.queueName = queueName;
@@ -65,6 +64,5 @@ public class DLXMessage implements Serializable {
         this.times = times;
     }
 
-    private long times;
 
 }

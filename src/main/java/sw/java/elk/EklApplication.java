@@ -4,6 +4,7 @@ package sw.java.elk;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 @SpringBootApplication
 @MapperScan("sw.java.elk.dao")
 @ComponentScan(basePackages = {"sw.java.elk.*"})
+@EnableRabbit
 public class EklApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
