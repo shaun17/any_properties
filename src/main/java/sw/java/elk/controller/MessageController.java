@@ -57,7 +57,34 @@ public class MessageController {
         MessageProperties messageProperties = new MessageProperties();
         messageProperties.setContentType(MessageProperties.CONTENT_TYPE_JSON);
         Message message = new Message(JSONObject.toJSONString(dlxMessage).getBytes(),messageProperties);
-        rabbitTemplate.convertAndSend(MQConstant.DEFAULT_EXCHANGE,MQConstant.DEFAULT_ROUT,message );
+//        rabbitTemplate.convertAndSend(MQConstant.DEFAULT_EXCHANGE,MQConstant.DEFAULT_ROUT,message );
+        rabbitTemplate.convertAndSend(MQConstant.DEFAULT_ROUT,message );
     }
+
+    @GetMapping("/workQueue")
+    public void workQueue(){
+        for(int i=0;i<10;i++){
+            rabbitTemplate.convertAndSend("workQueue","This is workQueue"+i);
+        }
+
+    }
+
+    @GetMapping("/productFanout")
+    public void productFanout(){
+        for(int i=0;i<10;i++){
+            rabbitTemplate.convertAndSend("productFanout","","This is workQueue"+i);
+        }
+
+    }
+
+        @GetMapping("/productRout")
+    public void productRout(){
+            rabbitTemplate.convertAndSend("productRout","logs","logs Message");
+            rabbitTemplate.convertAndSend("productRout","error","Error Message1");
+            rabbitTemplate.convertAndSend("productRout","error","Error Message2");
+            rabbitTemplate.convertAndSend("productRout","warning","warning Message");
+    }
+
+
 
 }

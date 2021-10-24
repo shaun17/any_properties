@@ -1,9 +1,6 @@
 package sw.java.elk.rabbit;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,7 +11,8 @@ import java.util.Map;
 public class QueueConfiguration {
     @Bean
     public DirectExchange defaultDirectExchange() {
-        return new DirectExchange(MQConstant.DEFAULT_EXCHANGE, true, false);
+        DirectExchange directExchange = new DirectExchange(MQConstant.DEFAULT_EXCHANGE, true, false);
+        return directExchange;
     }
 
     @Bean
@@ -26,6 +24,14 @@ public class QueueConfiguration {
     public Binding defaultBinding() {
         return BindingBuilder.bind(defaultQueue()).to(defaultDirectExchange()).with(MQConstant.DEFAULT_ROUT);
     }
+
+
+    @Bean
+    public FanoutExchange FanoutExchange() {
+        FanoutExchange exchange = new FanoutExchange(MQConstant.FOUT_EXCHANGE);
+        return exchange;
+    }
+
 //
 //    @Bean
 //    public Queue repeatTradeQueue() {

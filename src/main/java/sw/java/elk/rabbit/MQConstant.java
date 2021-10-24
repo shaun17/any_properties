@@ -8,9 +8,14 @@ public class MQConstant {
 
     //queue name
     public static final String DEFAULT_QUEUE = "default_queue";
+    public static final String DEFAULT_QUEUE2 = "default_queue2";
 
     //routing name
     public static final String DEFAULT_ROUT = "default_routing";
+
+
+    public static final String FOUT_EXCHANGE = "my_fanout_exchange";
+
 
 
     //TTL QUEUE

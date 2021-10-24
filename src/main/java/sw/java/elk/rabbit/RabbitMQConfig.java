@@ -14,6 +14,8 @@ import org.springframework.boot.context.properties.ConfigurationBeanFactoryMetad
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+
+
 @Configuration
 public class RabbitMQConfig {
     @Value("${spring.rabbitmq.host}")
@@ -38,7 +40,7 @@ public class RabbitMQConfig {
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
-//        rabbitTemplate.setAfterReceivePostProcessors(x->{x.getMessageProperties().setContentType(MessageProperties.TEXT_PLAIN.getContentType());return x;});
+        rabbitTemplate.setAfterReceivePostProcessors(x->{x.getMessageProperties().setContentType(MessageProperties.TEXT_PLAIN.getContentType());return x;});
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
         return rabbitTemplate;
     }
