@@ -26,35 +26,30 @@ public class QueueConfiguration {
     }
 
 
+
+
     @Bean
-    public FanoutExchange FanoutExchange() {
-        FanoutExchange exchange = new FanoutExchange(MQConstant.FOUT_EXCHANGE);
-        return exchange;
+    public Queue repeatTradeQueue() {
+        return new Queue(MQConstant.DEFAULT_REPEAT_TRADE_QUEUE_NAME, true, false, false);
     }
 
-//
-//    @Bean
-//    public Queue repeatTradeQueue() {
-//        return new Queue(MQConstant.DEFAULT_REPEAT_TRADE_QUEUE_NAME, true, false, false);
-//    }
-//
-//    @Bean
-//    public Binding repeatTradeBinding() {
-//        return BindingBuilder.bind(repeatTradeQueue()).to(defaultDirectExchange()).with(MQConstant.DEFAULT_REPEAT_TRADE_QUEUE_NAME);
-//
-//    }
-//
-//    @Bean
-//    public Queue deadLetterQueue() {
-//        Map map = new HashMap();
-//        map.put("x-dead-letter-exchange", MQConstant.LETTER_EXCHANGE);
-//        map.put("x-dead-letter-routing-key", MQConstant.DEFAULT_REPEAT_TRADE_QUEUE_NAME);
-//        return new Queue(MQConstant.DEFAULT_DEAD_LETTER_QUEUE_NAME, true, false, false, map);
-//    }
-//
-//    @Bean
-//    public Binding deadLetterBinding() {
-//        return BindingBuilder.bind(deadLetterQueue()).to(defaultDirectExchange()).with(MQConstant.DEFAULT_DEAD_LETTER_QUEUE_NAME);
-//    }
+    @Bean
+    public Binding repeatTradeBinding() {
+        return BindingBuilder.bind(repeatTradeQueue()).to(defaultDirectExchange()).with(MQConstant.DEFAULT_REPEAT_TRADE_QUEUE_NAME);
+
+    }
+
+    @Bean
+    public Queue deadLetterQueue() {
+        Map map = new HashMap();
+        map.put("x-dead-letter-exchange", MQConstant.LETTER_EXCHANGE);
+        map.put("x-dead-letter-routing-key", MQConstant.DEFAULT_REPEAT_TRADE_QUEUE_NAME);
+        return new Queue(MQConstant.DEFAULT_DEAD_LETTER_QUEUE_NAME, true, false, false, map);
+    }
+
+    @Bean
+    public Binding deadLetterBinding() {
+        return BindingBuilder.bind(deadLetterQueue()).to(defaultDirectExchange()).with(MQConstant.DEFAULT_DEAD_LETTER_QUEUE_NAME);
+    }
 
 }

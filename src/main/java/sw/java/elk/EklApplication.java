@@ -37,30 +37,20 @@ public class EklApplication implements CommandLineRunner {
     @Autowired
     RedisTemplate redisTemplate;
 
-//    @Override
-//    public void run(String... args) throws Exception {
-//        Logger logger = LoggerFactory.getLogger(EklApplication.class);
-//        logger.info("开始模拟提交订单");
-//        redisTemplate.opsForValue().set("order","1234567",20, TimeUnit.SECONDS);
-//
-//        logger.info("订单完成了，只有20s的时间去支付");
-//        messageService.send(MQConstant.ORDER_QUEUE_NAME,"order",20000);
-//        messageService.send(MQConstant.ORDER_QUEUE_NAME,"order");
-//    }
+    @Override
+    public void run(String... args) throws Exception {
+        Logger logger = LoggerFactory.getLogger(EklApplication.class);
+        logger.info("开始模拟提交订单");
+        redisTemplate.opsForValue().set("order","1234567",20, TimeUnit.SECONDS);
+
+        logger.info("订单完成了，只有20s的时间去支付");
+        messageService.sendDeadLetter(MQConstant.DEFAULT_ROUT,"order",20000);
+        messageService.send(MQConstant.DEFAULT_ROUT,"order");
+    }
 
     //成功打印
     @Autowired
     sw.java.elk.service.primary.UserService UserService;
-    @Override
-    public void run(String... args) throws Exception {
 
-//    User user = new User();
-//    user.setPassword("123456");
-//    user.setUserName("tom");
-//    user = PasswordUtils.toMD5(user);
-//        System.out.println(user);
-//        UserService.insert(user);
-
-    }
 
 }

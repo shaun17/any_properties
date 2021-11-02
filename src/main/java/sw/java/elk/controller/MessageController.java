@@ -64,6 +64,7 @@ public class MessageController {
 
     @GetMapping("/workQueue")
     public void workQueue(){
+        rabbitTemplate.setExchange("");
         for(int i=0;i<10;i++){
             rabbitTemplate.convertAndSend("workQueue","This is workQueue"+i);
         }
@@ -90,5 +91,13 @@ public class MessageController {
     public void UserConfirm(){
         rabbitTemplate.convertAndSend("confirm_exchange","","回调测试接口1： 这是一条消息");
     }
+
+    @GetMapping("/productTopic")
+    public void productTopic(){
+            rabbitTemplate.convertAndSend("productTopic","111.key.22","topic111 Message");
+            rabbitTemplate.convertAndSend("productTopic","111.key","topic222 Message");
+    }
+
+
 
 }

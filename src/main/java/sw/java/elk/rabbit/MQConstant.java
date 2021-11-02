@@ -8,13 +8,10 @@ public class MQConstant {
 
     //queue name
     public static final String DEFAULT_QUEUE = "default_queue";
-    public static final String DEFAULT_QUEUE2 = "default_queue2";
 
     //routing name
     public static final String DEFAULT_ROUT = "default_routing";
 
-
-    public static final String FOUT_EXCHANGE = "my_fanout_exchange";
 
 
 
@@ -25,6 +22,9 @@ public class MQConstant {
     public static final String DEFAULT_REPEAT_TRADE_QUEUE_NAME = "repeat.trade.queue";
 
     public static final String LETTER_EXCHANGE = "exchange_name";
+
+    //Hello 测试消息队列名称
+    public static final String ORDER_QUEUE_NAME = "ORDER_TEST";
 
 
 }

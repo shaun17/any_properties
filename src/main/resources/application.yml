@@ -3,7 +3,7 @@ server:
 spring:
   redis:
     host: 47.113.102.247
-    port: 6379
+    port: 6381
   rabbitmq:
     host: 47.113.102.247
     port: 5672

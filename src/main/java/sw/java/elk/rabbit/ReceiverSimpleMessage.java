@@ -20,15 +20,6 @@ public class ReceiverSimpleMessage {
 
     Logger logger  = LoggerFactory.getLogger(ReceiverSimpleMessage.class);
 
-    @Autowired
-    private IMessageService messageService;
-
-    @RabbitListener(queues = MQConstant.DEFAULT_QUEUE)
-    public void process( @Payload byte[] content) {
-        logger.info(new String(content));
-    }
-
-
     @RabbitListener(queuesToDeclare = @Queue("workQueue"))
     public void getMsg1( @Payload byte[] msg){
         System.out.println("MSG1："+new String(msg));
@@ -97,5 +88,15 @@ public class ReceiverSimpleMessage {
         System.out.println("this is confirm msg:"+msg);
     }
 
+
+    @RabbitListener(bindings = {
+            @QueueBinding(
+                    value = @Queue,//临时队列，队列名会随机
+                    exchange = @Exchange(name = "productTopic",type = "topic"),
+                    key =  {"#.key.#"})
+    })
+    public void getTopMsg(String msg){
+        System.out.println("topic mmmmm:"+msg);
+    }
 }
 

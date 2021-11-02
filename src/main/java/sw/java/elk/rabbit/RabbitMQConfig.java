@@ -53,6 +53,7 @@ public class RabbitMQConfig {
                 }
             }
         });
+        rabbitTemplate.setExchange(MQConstant.DEFAULT_EXCHANGE);
         return rabbitTemplate;
     }
 
