@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.converter.MessageConverter;
@@ -72,19 +73,22 @@ public class MessageController {
     @GetMapping("/productFanout")
     public void productFanout(){
         for(int i=0;i<10;i++){
-            rabbitTemplate.convertAndSend("productFanout","","This is workQueue"+i);
+            rabbitTemplate.convertAndSend("Fanout_exchange","","This is Fanout "+i);
         }
 
     }
 
-        @GetMapping("/productRout")
+    @GetMapping("/productRout")
     public void productRout(){
-            rabbitTemplate.convertAndSend("productRout","logs","logs Message");
-            rabbitTemplate.convertAndSend("productRout","error","Error Message1");
-            rabbitTemplate.convertAndSend("productRout","error","Error Message2");
-            rabbitTemplate.convertAndSend("productRout","warning","warning Message");
+        rabbitTemplate.convertAndSend("Routing_exchange","logs","logs Message");
+        rabbitTemplate.convertAndSend("Routing_exchange","error","Error Message 1");
+        rabbitTemplate.convertAndSend("Routing_exchange","error","Error Message 2");
+        rabbitTemplate.convertAndSend("Routing_exchange","warning","warning Message");
     }
 
-
+    @GetMapping("/UserConfirm")
+    public void UserConfirm(){
+        rabbitTemplate.convertAndSend("confirm_exchange","","回调测试接口1： 这是一条消息");
+    }
 
 }

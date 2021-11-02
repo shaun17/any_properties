@@ -4,6 +4,7 @@ import com.rabbitmq.client.MessageProperties;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -42,6 +43,16 @@ public class RabbitMQConfig {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
         rabbitTemplate.setAfterReceivePostProcessors(x->{x.getMessageProperties().setContentType(MessageProperties.TEXT_PLAIN.getContentType());return x;});
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+        rabbitTemplate.setConfirmCallback(new RabbitTemplate.ConfirmCallback() {
+            @Override
+            public void confirm(CorrelationData correlationData, boolean b, String s) {
+                if(b){
+                    System.out.println("confirm okkk ： "+s);
+                }else{
+                    System.out.println("confirm noooot okk ： "+s);
+                }
+            }
+        });
         return rabbitTemplate;
     }
 

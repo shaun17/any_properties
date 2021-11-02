@@ -42,49 +42,59 @@ public class ReceiverSimpleMessage {
     @RabbitListener(bindings = {
             @QueueBinding(
                     value = @Queue,//临时队列，队列名会随机
-                    exchange = @Exchange(name = "productFanout",type = "fanout") //绑定Exchange
+                    exchange = @Exchange(name = "Fanout_exchange",type = "fanout") //绑定Exchange
             )
     })
     public void getExchangeMsg1(String msg){
-        System.out.println("Fanout1消费开始:"+msg);
+        System.out.println("Fanout  1 接受消息 :"+msg);
     }
 
 
     @RabbitListener(bindings = {
             @QueueBinding(
                     value = @Queue,//临时队列，队列名会随机
-                    exchange = @Exchange(name = "productFanout",type = "fanout"))
+                    exchange = @Exchange(name = "Fanout_exchange",type = "fanout"))
     })
     public void getExchangeMsg2(String msg){
-        System.out.println("Fanout2:"+msg);
+        System.out.println("Fanout  2 接受消息 :"+msg);
     }
 
     @RabbitListener(bindings = {
             @QueueBinding(
                     value = @Queue,//临时队列，队列名会随机
-                    exchange = @Exchange("fanoutExchange"))
+                    exchange = @Exchange(name = "Fanout_exchange",type = "fanout"))
     })
     public void getExchangeMsg3(String msg){
-        System.out.println("Fanout33333:"+msg);
+        System.out.println("Fanout  3 接受消息 :"+msg);
     }
 
     @RabbitListener(bindings = {
             @QueueBinding(
                     value = @Queue,//临时队列，队列名会随机
-                    exchange = @Exchange(name = "productRout",type = "direct"),
+                    exchange = @Exchange(name = "Routing_exchange",type = "direct"),
                     key = "error")
     })
     public void getRoutMsg4(String msg){
-        System.out.println("rout1:"+msg);
+        System.out.println("error routting:"+msg);
     }
     @RabbitListener(bindings = {
             @QueueBinding(
                     value = @Queue,//临时队列，队列名会随机
-                    exchange = @Exchange(name = "productRout",type = "direct"),
+                    exchange = @Exchange(name = "Routing_exchange",type = "direct"),
                     key =  {"error","logs","warning"})
     })
     public void getRoutMsg3(String msg){
-        System.out.println("rout222:"+msg);
+        System.out.println("other routting:"+msg);
+    }
+
+
+  @RabbitListener(bindings = {
+            @QueueBinding(
+                    value = @Queue(name = "confirm_queue"),//临时队列，队列名会随机
+                    exchange = @Exchange(name = "confirm_exchange",type = "direct"))
+    })
+    public void getUserCnfirm(String msg){
+        System.out.println("this is confirm msg:"+msg);
     }
 
 }
