@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-@RabbitListener(queues = MQConstant.DEFAULT_REPEAT_TRADE_QUEUE_NAME)
+@RabbitListener(queues = MQConstant.DEFAULT_DEAD_LETTER_QUEUE_NAME)
 public class ReceiverDelayMessage {
     @Autowired
     private IMessageService messageService;

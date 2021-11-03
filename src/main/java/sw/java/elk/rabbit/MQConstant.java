@@ -21,10 +21,14 @@ public class MQConstant {
     //DLX repeat QUEUE 死信转发队列
     public static final String DEFAULT_REPEAT_TRADE_QUEUE_NAME = "repeat.trade.queue";
 
-    public static final String LETTER_EXCHANGE = "exchange_name";
+    public static final String LETTER_EXCHANGE = "letter_exchange";
 
-    //Hello 测试消息队列名称
-    public static final String ORDER_QUEUE_NAME = "ORDER_TEST";
+    //order消息队列名称
+    public static final String ORDER_QUEUE_NAME = "order.queue";
+    //order消息exchange名称
+    public static final String ORDER_EXCHANGE_NAME = "order.exchange";
+    //order消息exchange名称
+    public static final String ORDER_ROUTING_NAME = "order.routing";
 
 
 }

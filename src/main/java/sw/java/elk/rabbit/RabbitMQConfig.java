@@ -60,6 +60,7 @@ public class RabbitMQConfig {
     @Bean
     public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setDefaultRequeueRejected(false);
         factory.setConnectionFactory(connectionFactory);
         factory.setAfterReceivePostProcessors(x->{x.getMessageProperties().setContentType(MessageProperties.TEXT_PLAIN.getContentType());return x;});
         factory.setMessageConverter(new Jackson2JsonMessageConverter());

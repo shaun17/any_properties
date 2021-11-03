@@ -17,10 +17,9 @@ public class IMessageServiceImpl implements IMessageService{
     @Autowired
     RabbitTemplate rabbitTemplate;
 
-
     @Override
     public void send(String queueName, String message) {
-        rabbitTemplate.convertAndSend(MQConstant.DEFAULT_EXCHANGE,queueName, message);
+        rabbitTemplate.convertAndSend(MQConstant.ORDER_EXCHANGE_NAME,queueName, message);
     }
 
     @Override
@@ -33,7 +32,7 @@ public class IMessageServiceImpl implements IMessageService{
                 return message;
             }
         };
-        rabbitTemplate.convertAndSend(MQConstant.DEFAULT_EXCHANGE,MQConstant.DEFAULT_DEAD_LETTER_QUEUE_NAME, JSONObject.toJSONString(dlxMessage), processor);
+        rabbitTemplate.convertAndSend(MQConstant.ORDER_EXCHANGE_NAME,MQConstant.DEFAULT_DEAD_LETTER_QUEUE_NAME, JSONObject.toJSONString(dlxMessage), processor);
 
     }
 
