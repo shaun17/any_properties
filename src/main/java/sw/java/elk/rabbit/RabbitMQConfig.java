@@ -1,6 +1,7 @@
 package sw.java.elk.rabbit;
 
 import com.rabbitmq.client.MessageProperties;
+import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -64,6 +65,7 @@ public class RabbitMQConfig {
         factory.setConnectionFactory(connectionFactory);
         factory.setAfterReceivePostProcessors(x->{x.getMessageProperties().setContentType(MessageProperties.TEXT_PLAIN.getContentType());return x;});
         factory.setMessageConverter(new Jackson2JsonMessageConverter());
+        factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         return factory;
     }
 

@@ -35,10 +35,11 @@ public class ReceiverMessage {
 
     @RabbitListener(bindings = {
             @QueueBinding(
-                    value = @Queue(name =MQConstant.ORDER_QUEUE_NAME),//临时队列，队列名会随机
+                    value = @Queue(name =MQConstant.ORDER_QUEUE_NAME),
                     exchange = @Exchange(name = MQConstant.ORDER_EXCHANGE_NAME),
             arguments = {@Argument(name = "x-dead-letter-exchange", value = MQConstant.LETTER_EXCHANGE)
-                    ,@Argument(name ="x-dead-letter-routing-key" ,value = MQConstant.DEFAULT_REPEAT_TRADE_QUEUE_NAME)})
+                    ,@Argument(name ="x-dead-letter-routing-key" ,value = MQConstant.DEFAULT_REPEAT_TRADE_QUEUE_NAME)},
+            key = MQConstant.ORDER_ROUTING_NAME)
     })
     public void orderProcess(Message message, Channel channel) throws IOException {
         logger.info(new String(message.getBody()));
@@ -46,7 +47,8 @@ public class ReceiverMessage {
         if(order!=null) {
             System.out.println(order.toString());
             System.out.println("查询到订单，还在有效期，支付即成功");
-            channel.basicNack(message.getMessageProperties().getDeliveryTag(),false,false);
+//            channel.basicNack(message.getMessageProperties().getDeliveryTag(),false,false);
+            channel.exchangeDeclare( MQConstant.LETTER_EXCHANGE,"direct");
         }else{
             System.out.println("没有查询到订单，无效支付");
         }

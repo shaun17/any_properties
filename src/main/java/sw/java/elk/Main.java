@@ -2,6 +2,7 @@ package sw.java.elk;
 
 import com.alibaba.druid.sql.visitor.functions.Char;
 
+import java.rmi.MarshalledObject;
 import java.util.*;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -11,10 +12,14 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws Exception{
-      Stack s  = new Stack();
-      s.add(1);
-      s.pop();
-        System.out.println(s.isEmpty());
+        String s = "abc";
+        String s2 = "abc";
+        char[] chars = s.toCharArray();
+        Arrays.sort(chars);
+        s = new String(chars);
+        HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
+
+
     }
     public static void temp(){
         ThreadPoolExecutor s = new ThreadPoolExecutor(1,2,100, TimeUnit.MINUTES,new SynchronousQueue<>());

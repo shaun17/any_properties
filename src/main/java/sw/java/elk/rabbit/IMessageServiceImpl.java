@@ -32,7 +32,7 @@ public class IMessageServiceImpl implements IMessageService{
                 return message;
             }
         };
-        rabbitTemplate.convertAndSend(MQConstant.ORDER_EXCHANGE_NAME,MQConstant.DEFAULT_DEAD_LETTER_QUEUE_NAME, JSONObject.toJSONString(dlxMessage), processor);
+        rabbitTemplate.convertAndSend(MQConstant.ORDER_EXCHANGE_NAME,MQConstant.DEFAULT_REPEAT_TRADE_QUEUE_NAME, JSONObject.toJSONString(dlxMessage), processor);
 
     }
 

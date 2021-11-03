@@ -9,7 +9,11 @@ spring:
     port: 5672
     username: guest
     password: guest
-    publisher-confirm-type: correlated
+    listener:
+      simple:
+        acknowledge-mode: manual
+    publisher-returns: true
+    publisher-confirms: true
   datasource:
     primary:
       type: com.alibaba.druid.pool.DruidDataSource
