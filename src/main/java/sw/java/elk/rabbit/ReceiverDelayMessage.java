@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-@Component
-@RabbitListener(queues = MQConstant.DEFAULT_DEAD_LETTER_QUEUE_NAME)
+//@Component 干扰我
+//@RabbitListener(queues = MQConstant.DEFAULT_DEAD_LETTER_QUEUE_NAME)
 public class ReceiverDelayMessage {
     @Autowired
     private IMessageService messageService;

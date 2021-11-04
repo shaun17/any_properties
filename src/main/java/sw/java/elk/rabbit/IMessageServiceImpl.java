@@ -19,7 +19,7 @@ public class IMessageServiceImpl implements IMessageService{
 
     @Override
     public void send(String queueName, String message) {
-        rabbitTemplate.convertAndSend(MQConstant.ORDER_EXCHANGE_NAME,queueName, message);
+        rabbitTemplate.convertAndSend(MQConstant.LETTER_EXCHANGE,queueName, message);
     }
 
     @Override
