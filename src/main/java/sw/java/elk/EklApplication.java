@@ -44,8 +44,8 @@ public class EklApplication implements CommandLineRunner {
         redisTemplate.opsForValue().set("order","1234567",20, TimeUnit.SECONDS);
 
         logger.info("订单完成了，只有20s的时间去支付");
-//        messageService.sendDeadLetter(MQConstant.ORDER_QUEUE_NAME,"order",20000);
-        messageService.send(MQConstant.ORDER_ROUTING_NAME,"order is  coming");
+        messageService.sendDeadLetter(MQConstant.ORDER_EXCHANGE_NAME,"order is  coming",10000);
+//        messageService.send(MQConstant.ORDER_EXCHANGE_NAME,"order is  coming");
     }
 
     //成功打印

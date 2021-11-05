@@ -19,7 +19,7 @@ public class MQConstant {
     public static final String DEFAULT_DEAD_LETTER_QUEUE_NAME = "dead.letter.queue";
 
     //DLX repeat QUEUE 死信转发队列
-    public static final String DEFAULT_REPEAT_TRADE_QUEUE_NAME = "repeat.trade.queue";
+    public static final String DEFAULT_DEAD_LETTER_ROUTING = "dead.letter.routing";
 
     public static final String LETTER_EXCHANGE = "letter_exchange";
 

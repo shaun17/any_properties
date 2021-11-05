@@ -18,13 +18,13 @@ public class IMessageServiceImpl implements IMessageService{
     RabbitTemplate rabbitTemplate;
 
     @Override
-    public void send(String queueName, String message) {
-        rabbitTemplate.convertAndSend(MQConstant.LETTER_EXCHANGE,queueName, message);
+    public void send(String exchangeName, String message) {
+        rabbitTemplate.convertAndSend(exchangeName,MQConstant.ORDER_ROUTING_NAME, message);
     }
 
     @Override
-    public void sendDeadLetter(String queueName, String message, long times) {
-        DLXMessage dlxMessage = new DLXMessage(MQConstant.DEFAULT_EXCHANGE,queueName,message,times);
+    public void sendDeadLetter(String exchangeName, String message, long times) {
+        DLXMessage dlxMessage = new DLXMessage(exchangeName,MQConstant.ORDER_QUEUE_NAME,message,times);
         MessagePostProcessor processor = new MessagePostProcessor(){
             @Override
             public Message postProcessMessage(Message message) throws AmqpException {
@@ -32,7 +32,7 @@ public class IMessageServiceImpl implements IMessageService{
                 return message;
             }
         };
-        rabbitTemplate.convertAndSend(MQConstant.ORDER_EXCHANGE_NAME,MQConstant.DEFAULT_REPEAT_TRADE_QUEUE_NAME, JSONObject.toJSONString(dlxMessage), processor);
+        rabbitTemplate.convertAndSend(exchangeName,MQConstant.ORDER_ROUTING_NAME, JSONObject.toJSONString(dlxMessage), processor);
 
     }
 
