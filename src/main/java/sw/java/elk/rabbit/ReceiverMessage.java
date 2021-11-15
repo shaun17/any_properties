@@ -39,7 +39,7 @@ public class ReceiverMessage {
                     value = @Queue(name =MQConstant.ORDER_QUEUE_NAME,autoDelete = "false",arguments =
                             {@Argument(name = "x-dead-letter-exchange", value = MQConstant.LETTER_EXCHANGE)
                             ,@Argument(name = "x-dead-letter-routing-key" ,value = MQConstant.DEFAULT_DEAD_LETTER_ROUTING)
-                            ,@Argument(name = "x-message-ttl", type = "java.lang.Integer", value = "1")}),
+                            ,@Argument(name = "x-message-ttl", type = "java.lang.Integer", value = "2000")}),
                     exchange = @Exchange(name = MQConstant.ORDER_EXCHANGE_NAME),
                     key = MQConstant.ORDER_ROUTING_NAME)
     })
@@ -64,6 +64,6 @@ public class ReceiverMessage {
     })
     public void receiveA(Message message, Channel channel) throws IOException {
         System.out.println("收到死信消息A：" + new String(message.getBody()));
-        channel.basicNack(message.getMessageProperties().getDeliveryTag(), false,false);
+        channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
     }
 }

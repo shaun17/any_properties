@@ -12,8 +12,11 @@ spring:
     listener:
       simple:
         acknowledge-mode: manual
+      direct:
+        acknowledge-mode: manual
     publisher-returns: true
     publisher-confirms: true
+    publisher-confirm-type: CORRELATED
   datasource:
     primary:
       type: com.alibaba.druid.pool.DruidDataSource

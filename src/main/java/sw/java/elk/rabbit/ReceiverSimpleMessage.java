@@ -2,17 +2,20 @@ package sw.java.elk.rabbit;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
+import java.io.IOException;
 import java.util.Map;
 
 @Component
@@ -84,8 +87,10 @@ public class ReceiverSimpleMessage {
                     value = @Queue(name = "confirm_queue"),//临时队列，队列名会随机
                     exchange = @Exchange(name = "confirm_exchange",type = "direct"))
     })
-    public void getUserCnfirm(String msg){
-        System.out.println("this is confirm msg:"+msg);
+    public void getUserCnfirm(Message msg, Channel channel) throws IOException {
+        channel.basicAck(msg.getMessageProperties().getDeliveryTag(),false);
+        System.out.println("this is confirm msg:"+new String(msg.getBody()));
+      channel.confirmSelect();
     }
 
 
