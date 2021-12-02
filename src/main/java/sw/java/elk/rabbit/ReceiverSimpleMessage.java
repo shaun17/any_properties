@@ -101,7 +101,16 @@ public class ReceiverSimpleMessage {
                     key =  {"#.key.#"})
     })
     public void getTopMsg(String msg){
-        System.out.println("topic mmmmm:"+msg);
+        System.out.println("topic1 mmmmm:"+msg);
+    }
+    @RabbitListener(bindings = {
+            @QueueBinding(
+                    value = @Queue,//临时队列，队列名会随机
+                    exchange = @Exchange(name = "productTopic",type = "topic"),
+                    key =  {"*.key.#"})
+    })
+    public void getTopMsg2(String msg){
+        System.out.println("topic2 mmmmm:"+msg);
     }
 }
 
