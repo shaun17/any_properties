@@ -7,9 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import sw.java.elk.po.Pojo;
+import sw.java.elk.po.TableA;
 import sw.java.elk.po.User;
+import sw.java.elk.service.primary.TableAService;
 import sw.java.elk.service.primary.UserService;
 
 import java.util.HashMap;
@@ -18,7 +23,7 @@ import java.util.Map;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class EklApplicationTests {
+public class EklApplicationTests extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -101,6 +106,25 @@ public class EklApplicationTests {
     public void method() {
         assert 1 == 2;
         System.out.printf("aaaa");
+    }
+    @Autowired
+    TableAService tableAService;
+
+    @Test
+    public void tebleQuery(){
+        List<Map<String, Object>> maps = tableAService.queryList();
+        System.out.println(maps.toString());
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void tebleInsert(){
+        TableA tableA = new TableA();
+        tableA.setColumn1("column13???");
+        tableA.setColumn2("col is not null");
+        int result  = tableAService.insertOne(tableA);
+        System.out.println(result);
     }
 
 }

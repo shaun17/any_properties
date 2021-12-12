@@ -2,7 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sw.java.elk.dao.TableADao">
     <select id="queryList" resultType="map">
-        select * from table_a
+        select * from tx_test
     </select>
+
+    <insert id="insert" parameterType="sw.java.elk.po.TableA">
+        insert into tx_test (column1,column2) values
+            (#{column1},#{column2})
+    </insert>
 
 </mapper>

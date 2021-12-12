@@ -1,10 +1,11 @@
 package sw.java.elk.proxy;
 
-public class Main
-{
+import java.lang.reflect.Proxy;
+
+public class Main {
     public static void main(String[] args) {
-        UserProxy userProxy = new UserProxy();
-        UserI o =(UserI) userProxy.newProxyInstance(new User());
-        o.method();
+        UserInvocationHandler userProxy = new UserInvocationHandler(new User());
+        UserI user = (UserI)Proxy.newProxyInstance(UserI.class.getClassLoader(), new Class[]{UserI.class}, userProxy);
+        user.method();
     }
 }
