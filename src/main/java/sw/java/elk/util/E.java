@@ -9,4 +9,9 @@ public  enum E implements InterfaceA {
     public void interM() {
 
     }
+
+    @Override
+    public void mm() {
+
+    }
 }

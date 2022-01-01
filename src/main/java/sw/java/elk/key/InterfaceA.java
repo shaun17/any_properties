@@ -5,4 +5,9 @@ public  interface InterfaceA {
         System.out.println();
     };
     void interM();
+    abstract void mm();
+
+     interface AA{
+
+    }
 }
