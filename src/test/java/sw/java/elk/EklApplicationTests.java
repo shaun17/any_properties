@@ -121,8 +121,6 @@ public class EklApplicationTests extends AbstractTransactionalJUnit4SpringContex
     @Rollback
     public void tebleInsert(){
         TableA tableA = new TableA();
-        tableA.setColumn1("column13???");
-        tableA.setColumn2("col is not null");
         int result  = tableAService.insertOne(tableA);
         System.out.println(result);
     }

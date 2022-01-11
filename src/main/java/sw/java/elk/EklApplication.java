@@ -42,6 +42,7 @@ public class EklApplication implements CommandLineRunner {
         Logger logger = LoggerFactory.getLogger(EklApplication.class);
         logger.info("开始模拟提交订单");
         redisTemplate.opsForValue().set("order","1234567",20, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set("order2","12345678",20, TimeUnit.SECONDS);
 
         logger.info("订单完成了，只有20s的时间去支付");
         messageService.sendDeadLetter(MQConstant.ORDER_EXCHANGE_NAME,"order is  coming",10000);

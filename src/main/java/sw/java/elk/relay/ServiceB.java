@@ -1,15 +1,13 @@
-package sw.java.elk.xunhaun;
+package sw.java.elk.relay;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class ServiceB {
-    ServiceA serviceA;
-
     @Autowired
-    public ServiceB(ServiceA serviceA){
-        this.serviceA=serviceA;
+    ServiceA serviceA;
+    public void methodBYB(){
+        System.out.println("this is BBB");
     }
-
 }
