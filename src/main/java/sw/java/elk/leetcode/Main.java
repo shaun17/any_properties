@@ -1,6 +1,8 @@
 package sw.java.elk.leetcode;
 
 import java.util.Arrays;
+import java.util.Base64;
+import java.util.HashMap;
 
 /**
  * @Author wenrenhao
@@ -9,10 +11,11 @@ import java.util.Arrays;
  */
 public class Main {
     public static void main(String[] args) {
-        A a = new A("a",11);
-        A b = a ;
-        b.setName("b");
-        System.out.println(25%5);
+        byte[] abcs = Base64.getDecoder().decode("qqwwiijjuujjh=");
+        System.out.println(new String(abcs));
+        String s = Base64.getEncoder().encodeToString(abcs);
+        System.out.println(s);
+
     }
 
 

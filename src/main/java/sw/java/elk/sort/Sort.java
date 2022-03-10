@@ -1,4 +1,4 @@
-package sw.java.elk.thread;
+package sw.java.elk.sort;
 
 import java.util.Arrays;
 
