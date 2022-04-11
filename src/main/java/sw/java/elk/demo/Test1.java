@@ -12,12 +12,12 @@ public class Test1 {
     static String add1 = new String("aaaa");
     static String add2 = new String("bbbb");
     public static void main(String[] args) {
-        A a = new A("aa", 1, add1);
+        A a = new A("aa", 1, add1,Arrays.asList("a"));
         B b = new B();
         System.out.println(a.toString());
         BeanUtils.copyProperties(a, b);
-        add1 = new String("ccc");
-        a.setAddress(add1);
+        System.out.println(b.toString());
+        a.getList().set(0,"vvv");
         System.out.println(a.toString());
         System.out.println(b.toString());
     }
@@ -26,15 +26,17 @@ public class Test1 {
 }
 @Data
 class A {
-    A(String name, Integer age, String address) {
+    A(String name, Integer age, String address,List list) {
         this.name = name;
         this.age = age;
         this.address = address;
+        this.list = list;
     }
 
     private String name;
     private Integer age;
     private String address;
+    private List list;
 
     @Override
     public String toString() {
@@ -42,6 +44,7 @@ class A {
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", address='" + address + '\'' +
+                ", list='" + list + '\'' +
                 '}';
     }
 }
@@ -50,6 +53,8 @@ class B {
     private String name;
     private Integer age;
     private String address;
+    private List list;
+
 
     @Override
     public String toString() {
@@ -57,6 +62,7 @@ class B {
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", address='" + address + '\'' +
+                ", list='" + list + '\'' +
                 '}';
     }
 }
