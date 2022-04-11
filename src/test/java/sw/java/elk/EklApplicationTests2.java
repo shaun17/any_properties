@@ -3,6 +3,7 @@ package sw.java.elk;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -31,6 +32,48 @@ public class EklApplicationTests2 extends AbstractTransactionalJUnit4SpringConte
     public void tebleQuery(){
         serviceA.methodBYA();
     }
+    @Test
+    public void test(){
+        A a = new A("aa", 1, "aaaa");
+        B b = new B();
+        System.out.println(a.toString());
+        BeanUtils.copyProperties(a, b);
+        System.out.println(b.toString());
+    }
+}
 
+class A {
+    A(String name, Integer age, String address) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+    }
 
+    private String name;
+    private Integer age;
+    private String address;
+
+    @Override
+    public String toString() {
+        return "A{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                '}';
+    }
+}
+
+class B {
+    private String name;
+    private Integer age;
+    private String address;
+
+    @Override
+    public String toString() {
+        return "B{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }
